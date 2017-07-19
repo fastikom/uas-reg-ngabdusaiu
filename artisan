@@ -1,0 +1,51 @@
+#!/usr/bin/env php
+<?php
+
+/*
+| ------------------------------------------------- -------------------------
+| Daftarkan Auto Loader
+| ------------------------------------------------- -------------------------
+|
+| Komposer menyediakan loader kelas yang mudah dibuat secara otomatis
+| Untuk aplikasi kita Kita hanya perlu memanfaatkannya! Kita akan membutuhkannya
+| Ke script disini agar kita tidak perlu khawatir dengan
+| Pemuatan kelas kita "secara manual". Merasa senang bisa bersantai.
+|
+* /
+
+require __DIR__.'/bootstrap/autoload.php';
+
+$app = require_once __DIR__.'/bootstrap/app.php';
+
+/ *
+| ------------------------------------------------- -------------------------
+| Jalankan Aplikasi Artisan
+| ------------------------------------------------- -------------------------
+|
+| Saat kita menjalankan aplikasi konsol, perintah CLI saat ini
+| Dieksekusi di konsol ini dan respon dikirim kembali ke terminal
+| Atau perangkat output lain untuk pengembang. Tidak ada gunanya!
+|
+* /
+
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+
+$status = $kernel->handle(
+    $input = new Symfony\Component\Console\Input\ArgvInput,
+    new Symfony\Component\Console\Output\ConsoleOutput
+);
+
+/ *
+| ------------------------------------------------- -------------------------
+| Shutdown Aplikasi
+| ------------------------------------------------- -------------------------
+|
+| Setelah Artisan selesai berlari. Kami akan mematikan acara shutdown
+| Sehingga setiap pekerjaan akhir bisa dilakukan dengan aplikasi sebelum kita tutup
+| Turunkan prosesnya Ini adalah hal terakhir yang terjadi atas permintaan tersebut.
+|
+* /
+
+$kernel->terminate($input, $status);
+
+exit($status);
